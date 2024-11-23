@@ -275,4 +275,30 @@ Vue.createApp({
 
 function formatage (chaine) {
     return chaine.replace("'","\\'");
+    
 };
+
+var triche = L.tileLayer.wms("http://localhost:8081/geoserver/wms", { 
+    // /!\ pour nous le port est 8081, surement nécessaire de remettre 8080
+    layers: 'escape_game:triche',
+    format: 'image/PNG',
+    transparent: true
+})//.addTo(map);
+//une fois la heatmap realisé il faudra changé les paramètres je pense 
+var scoreTriche = false; // variable pour savoir si le joeur a triché et compter son score en fonction
+
+var boutonTriche = document.getElementById('btnTriche');
+
+boutonTriche.addEventListener('click', function() {
+    
+    if (!map.hasLayer(triche)) {
+        // affichage de la carte de triche
+        triche.addTo(map);
+        scoreTriche = true;
+        boutonTriche.textContent = "Désactiver la triche"; 
+    } else {
+        // désaffichage de la carte de triche
+        map.removeLayer(triche);
+        boutonTriche.textContent = "Activer la triche"; 
+    }
+});
