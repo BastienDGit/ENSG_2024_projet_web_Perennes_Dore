@@ -276,4 +276,4 @@ Vue.createApp({
 
 function formatage (chaine) {
     return chaine.replace("'","\\'");
-};
+};"""
